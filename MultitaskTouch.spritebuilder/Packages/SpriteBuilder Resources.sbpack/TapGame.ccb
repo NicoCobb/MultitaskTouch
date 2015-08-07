@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>2</integer>
+	<integer>7</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -122,8 +122,8 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.20999999344348907</real>
-							<real>0.64999997615814209</real>
+							<real>0.39985829591751099</real>
+							<real>0.78306001424789429</real>
 							<real>0.87000000476837158</real>
 							<real>1</real>
 						</array>
@@ -137,12 +137,10 @@
 						<real>1</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string></string>
+		<string>TapGame</string>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>
@@ -180,8 +178,8 @@
 				<string>Size</string>
 				<key>value</key>
 				<array>
-					<real>284</real>
-					<real>160</real>
+					<real>568</real>
+					<real>360</real>
 					<integer>0</integer>
 					<integer>0</integer>
 				</array>
@@ -211,6 +209,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
