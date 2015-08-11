@@ -51,15 +51,15 @@
 				<key>displayName</key>
 				<string>CCNodeColor</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>bar</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>physicsBody</key>
 				<dict>
 					<key>affectedByGravity</key>
-					<true/>
+					<false/>
 					<key>allowsRotation</key>
-					<true/>
+					<false/>
 					<key>bodyShape</key>
 					<integer>0</integer>
 					<key>collisionCategories</key>
@@ -67,17 +67,17 @@
 					<key>collisionMask</key>
 					<array/>
 					<key>collisionType</key>
-					<string>pongGame</string>
+					<string>pongBar</string>
 					<key>cornerRadius</key>
 					<real>0.0</real>
 					<key>density</key>
 					<real>1</real>
 					<key>dynamic</key>
-					<true/>
+					<false/>
 					<key>elasticity</key>
-					<real>0.30000001192092896</real>
+					<real>1</real>
 					<key>friction</key>
-					<real>0.30000001192092896</real>
+					<real>0.0</real>
 					<key>points</key>
 					<array>
 						<array>
@@ -85,12 +85,36 @@
 							<real>0.0</real>
 						</array>
 						<array>
-							<real>0.0</real>
-							<real>30</real>
+							<real>-0.26451605558395386</real>
+							<real>20.063753128051758</real>
 						</array>
 						<array>
-							<real>120</real>
-							<real>30</real>
+							<real>14.494951248168945</real>
+							<real>24.647163391113281</real>
+						</array>
+						<array>
+							<real>33.5025634765625</real>
+							<real>28.117431640625</real>
+						</array>
+						<array>
+							<real>52.050140380859375</real>
+							<real>29.79010009765625</real>
+						</array>
+						<array>
+							<real>66.829765319824219</real>
+							<real>29.79010009765625</real>
+						</array>
+						<array>
+							<real>86.090087890625</real>
+							<real>28.142274856567383</real>
+						</array>
+						<array>
+							<real>104.020263671875</real>
+							<real>25.48896598815918</real>
+						</array>
+						<array>
+							<real>120.09824371337891</real>
+							<real>20.68580436706543</real>
 						</array>
 						<array>
 							<real>120</real>
@@ -105,12 +129,36 @@
 								<real>0.0</real>
 							</array>
 							<array>
-								<real>120</real>
-								<real>30</real>
+								<real>120.09824371337891</real>
+								<real>20.68580436706543</real>
 							</array>
 							<array>
-								<real>0.0</real>
-								<real>30</real>
+								<real>104.020263671875</real>
+								<real>25.48896598815918</real>
+							</array>
+							<array>
+								<real>86.090087890625</real>
+								<real>28.142274856567383</real>
+							</array>
+							<array>
+								<real>66.829765319824219</real>
+								<real>29.79010009765625</real>
+							</array>
+							<array>
+								<real>52.050140380859375</real>
+								<real>29.79010009765625</real>
+							</array>
+							<array>
+								<real>33.5025634765625</real>
+								<real>28.117431640625</real>
+							</array>
+							<array>
+								<real>14.494951248168945</real>
+								<real>24.647163391113281</real>
+							</array>
+							<array>
+								<real>-0.26451605558395386</real>
+								<real>20.063753128051758</real>
 							</array>
 							<array>
 								<real>0.0</real>
@@ -164,7 +212,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.0</real>
+							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -207,7 +255,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string></string>
+		<string>PongBar</string>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>
