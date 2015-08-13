@@ -1,5 +1,5 @@
 //
-//  PongBar.swift
+//  GameDelegate.swift
 //  MultitaskTouch
 //
 //  Created by nico cobb on 8/11/15.
@@ -8,8 +8,6 @@
 
 import Foundation
 
-class PongBar: CCSprite {
-    
-//    weak var bar: CCNode!
-    weak var grabBox: CCNode!
+protocol GameDelegate {
+    func gameOver()
 }

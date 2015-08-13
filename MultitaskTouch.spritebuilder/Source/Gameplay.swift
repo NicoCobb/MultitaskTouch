@@ -48,24 +48,37 @@ class Gameplay: CCScene {
     
     weak var retryButton: CCButton!
     weak var menuButton: CCButton!
+    weak var buttonNode: CCButton!
     
     func didLoadFromCCB() {
         userInteractionEnabled = true
         multipleTouchEnabled = true
+        retryButton.userInteractionEnabled = false
+        menuButton.userInteractionEnabled = false
         
         
         //add all games to specified locations
-        var gameOne = CCBReader.load("DragGame", owner: self)
-        gameOneContainer.addChild(gameOne)
-
+//        var gameOne = CCBReader.load("DragGame", owner: self)
+//        gameOneContainer.addChild(gameOne)
+//
 //        var gameTwo = CCBReader.load("SwipeGame", owner: self)
 //        gameTwoContainer.addChild(gameTwo)
 //
-//        var gameThree = CCBReader.load("TapGame", owner: self)
+//        var gameThree = CCBReader.load("TapGame", owner: self) as! TapGame
 //        gameThreeContainer.addChild(gameThree)
+//        gameThree.delegate = self
 //        
 //        var gameFour = CCBReader.load("TiltGame", owner: self)
 //        gameFourContainer.addChild(gameFour)
     }
 
+}
+
+extension Gameplay: GameDelegate{
+    
+    func gameOver() {
+        self.paused = true
+        buttonNode.visible = true
+    }
+    
 }

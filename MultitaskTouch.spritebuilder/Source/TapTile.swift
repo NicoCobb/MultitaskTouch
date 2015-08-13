@@ -13,6 +13,7 @@ class TapTile: CCNode {
     weak var tapTimeLabel: CCLabelTTF!
     weak var tapBlock: CCNode!
     
+    var delegate: GameDelegate!
     var tapTime: CCTime!
     var countTime: Int = 10 {
         didSet {
@@ -42,8 +43,18 @@ class TapTile: CCNode {
         countTime--
     }
     
+    func gameOver(){
+        delegate.gameOver()
+    }
+    
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         self.removeFromParent()
         println("detected touch")
+    }
+    
+    override func update(delta: CCTime) {
+        if self.scale == 0 {
+            gameOver()
+        }
     }
 }

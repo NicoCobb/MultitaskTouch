@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>10</integer>
+	<integer>11</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -444,7 +444,7 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>2</integer>
+						<integer>10</integer>
 						<key>baseClass</key>
 						<string>CCBFile</string>
 						<key>children</key>
@@ -452,7 +452,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>bar</string>
+						<string>CCBFile</string>
 						<key>memberVarAssignmentName</key>
 						<string>pongBar</string>
 						<key>memberVarAssignmentType</key>
@@ -490,7 +490,7 @@
 								<array>
 									<real>0.5</real>
 									<real>0.5</real>
-									<false/>
+									<true/>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -500,7 +500,7 @@
 								<key>type</key>
 								<string>CCBFile</string>
 								<key>value</key>
-								<string>PongBar.ccb</string>
+								<string>PongBarSprite.ccb</string>
 							</dict>
 						</array>
 						<key>selected</key>
@@ -538,7 +538,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>0.50999999046325684</real>
+									<real>0.52999997138977051</real>
 									<real>0.5</real>
 									<integer>0</integer>
 									<integer>2</integer>

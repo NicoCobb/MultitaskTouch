@@ -9,6 +9,8 @@
 import Foundation
 
 class TapGame: CCNode {
+    
+    var delegate: GameDelegate!
 
     var currentTiles = [TapTile]()
 
@@ -39,5 +41,4 @@ class TapGame: CCNode {
         var randomTileSpawnTime = CCTime(randomTileSpawn)
         scheduleOnce("generateTapBlock", delay: randomTileSpawnTime)
     }
-    
 }

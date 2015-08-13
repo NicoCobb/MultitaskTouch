@@ -18,25 +18,24 @@ class DragGame: CCNode {
     var pongBar: PongBar!
     var pongBall: CCSprite!
     var touchingBar = false
+    var delegate: GameDelegate!
     
-    var grabSpacePoint: CGPoint!
-    var grabSpaceBoxWidth: CGFloat!
-    var grabSpaceBoxHeight: CGFloat!
-    var grabSpaceBoxSize: CGSize!
-    var grabSpace: CGRect!
+//    var grabSpacePoint: CGPoint!
+//    var grabSpaceBoxWidth: CGFloat!
+//    var grabSpaceBoxHeight: CGFloat!
+//    var grabSpaceBoxSize: CGSize!
+//    var grabSpace: CGRect!
     var touchX: CGFloat?
-    
-    var ballSpeed: CGFloat = 150
+    var spaceBetweenBarCenterAndTouch: CGFloat?
+
+    var ballSpeed: CGFloat = 100
+    var grabBuffer: CGFloat = 10
+    var speedBuffer: CGFloat = 10
     
     func didLoadFromCCB() {
         userInteractionEnabled = true
         pongBall.physicsBody.velocity = ccp(0, -ballSpeed)
         gamePhysicsNode.debugDraw = true
-        grabSpacePoint = pongBar.positionInPoints
-        grabSpaceBoxWidth = pongBar.bar.boundingBox().width
-        grabSpaceBoxHeight = pongBar.bar.boundingBox().height
-        grabSpaceBoxSize = CGSize(width: grabSpaceBoxWidth, height: grabSpaceBoxHeight)
-        grabSpace = CGRect(origin: grabSpacePoint, size: grabSpaceBoxSize)
     }
     
     override func onEnter() {
@@ -72,14 +71,22 @@ class DragGame: CCNode {
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         let touchLocation = touch.locationInNode(self)
-        println("pongBar bar boundingBox: \(pongBar.bar.boundingBox())")
+        println("pongBar grab boundingBox: \(pongBar.grabBox.boundingBox())")
         println("pongBar Position: \(pongBar.positionInPoints)")
-        println("grabSpace: \(grabSpace)")
         println("touch Position: \(touchLocation)")
         
-        if grabSpace.contains(touchLocation) {
+        var grabSpacePoint = ccp(pongBar.positionInPoints.x - pongBar.boundingBox().width/2 - grabBuffer/2, pongBar.positionInPoints.y - pongBar.boundingBox().height/2 - grabBuffer/2)
+        var grabSpaceBoxWidth = pongBar.boundingBox().width * CGFloat(pongBar.scale) + grabBuffer
+        var grabSpaceBoxHeight = pongBar.boundingBox().height * CGFloat(pongBar.scale) + grabBuffer
+        var grabSpaceBoxSize = CGSize(width: grabSpaceBoxWidth, height: grabSpaceBoxHeight)
+        var grabSpace = CGRect(origin: grabSpacePoint, size: grabSpaceBoxSize)
+        
+        var xBuffer = pongBar.contentSizeInPoints.width * CGFloat(pongBar.scale)
+        
+        if touchLocation.x > pongBar.positionInPoints.x - xBuffer && touchLocation.x < pongBar.positionInPoints.x + xBuffer && touchLocation.y > pongBar.positionInPoints.y - pongBar.contentSizeInPoints.height * CGFloat(pongBar.scale) && touchLocation.y < pongBar.positionInPoints.y + pongBar.contentSizeInPoints.width * CGFloat(pongBar.scale){
             println("touching bar")
             touchingBar = true
+            spaceBetweenBarCenterAndTouch = touchLocation.x - pongBar.positionInPoints.x
         }
     }
     
@@ -91,15 +98,42 @@ class DragGame: CCNode {
     
     override func touchMoved(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         if touchingBar == true {
-            pongBar.position.x = touch.locationInNode(self).x
+            if let barSpace = spaceBetweenBarCenterAndTouch {
+                pongBar.positionInPoints.x = touch.locationInNode(self).x - barSpace
+            }
         }
     }
     
     override func update(delta: CCTime) {
-        grabSpacePoint = pongBar.positionInPoints
-        grabSpaceBoxWidth = pongBar.bar.boundingBox().width
-        grabSpaceBoxHeight = pongBar.bar.boundingBox().height
-        grabSpaceBoxSize = CGSize(width: grabSpaceBoxWidth, height: grabSpaceBoxHeight)
-        grabSpace = CGRect(origin: grabSpacePoint, size: grabSpaceBoxSize)
+        var ballXVelocity = pongBall.physicsBody.velocity.x
+        var ballYVelocity = pongBall.physicsBody.velocity.y
+        
+        //clamp ball speed
+        if ballYVelocity > ballSpeed {
+            pongBall.physicsBody.velocity.y = ballSpeed
+        }
+        
+        if ballXVelocity > ballSpeed + speedBuffer {
+            pongBall.physicsBody.velocity.x = ballSpeed + speedBuffer
+        }
+
+        //clamp bar position in node
+            //check left boundary
+        if (pongBar.positionInPoints.x) <= 0 {
+            pongBar.positionInPoints.x = 0
+            //check right boundary
+        } else if (pongBar.positionInPoints.x) >= boundingBox().width {
+            pongBar.positionInPoints.x = boundingBox().width
+        }
+        
+        //GAME OVER TRIGGER
+        if pongBall.positionInPoints.y < 0 {
+            gameOver()
+        }
+        
+    }
+    
+    func gameOver(){
+        delegate.gameOver()
     }
 }

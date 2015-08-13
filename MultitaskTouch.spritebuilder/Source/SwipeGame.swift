@@ -18,7 +18,9 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     var endTouchPosition: CGPoint?
     
     var runSwipeCheck = false
+    var swipeRemove = false
     var currentBlock: SwipeTile?
+    var delegate: GameDelegate!
     
     func didLoadFromCCB() {
         userInteractionEnabled = true
@@ -62,7 +64,11 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     }
     
     func ccPhysicsCollisionSeparate(pair: CCPhysicsCollisionPair!, swipeSensor: CCNode!, swipeTile: SwipeTile!) {
-        swipeGameOver()
+        if swipeRemove == true {
+            swipeRemove = false
+            return
+        }
+        gameOver()
     }
     
     func swipeGameOver() {
@@ -104,11 +110,13 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
                 //check if swipe was up for Up block
                 if swipeYLength >= 0 {
                     if activeBlock.blockDirection == .Up {
+                        swipeRemove = true
                         removeTile(activeBlock)
                     }
                 //check if swipe was down for Down block
                 } else {
                     if activeBlock.blockDirection == .Down {
+                        swipeRemove = true
                         removeTile(activeBlock)
                     }
                 }
@@ -116,10 +124,12 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
             } else {
                 if swipeXLength >= 0 {
                     if activeBlock.blockDirection == .Right {
+                        swipeRemove = true
                         removeTile(activeBlock)
                     }
                 } else {
                     if activeBlock.blockDirection == .Left {
+                        swipeRemove = true
                         removeTile(activeBlock)
                     }
                 }
@@ -130,6 +140,10 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     func removeTile(tile: SwipeTile) {
         tile.removeFromParent()
         currentBlock = nil
+    }
+    
+    func gameOver(){
+        delegate.gameOver()
     }
     
 }

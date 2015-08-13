@@ -10,6 +10,8 @@
 		5B121030197484FA004C1E1D /* MultitaskTouchActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* MultitaskTouchActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		770EB4A81B7A3B6B00D6B33A /* PongBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770EB4A71B7A3B6B00D6B33A /* PongBar.swift */; };
+		77189D7C1B7A8EB400BA8DD5 /* GameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77189D7B1B7A8EB400BA8DD5 /* GameDelegate.swift */; };
+		77189D801B7AB74000BA8DD5 /* MotionKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77189D7F1B7AB74000BA8DD5 /* MotionKit.swift */; };
 		779691DB1B7524B5003C74E2 /* Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779691DA1B7524B5003C74E2 /* Gameplay.swift */; };
 		779691E31B7524EC003C74E2 /* TiltGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779691E21B7524EC003C74E2 /* TiltGame.swift */; };
 		779691E51B7524FF003C74E2 /* DragGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779691E41B7524FF003C74E2 /* DragGame.swift */; };
@@ -167,6 +169,8 @@
 		5B121034197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/iOS/Info.plist; sourceTree = "<group>"; };
 		5BA4619E1974C88900785744 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AndroidManifest.xml; path = Platforms/Android/AndroidManifest.xml; sourceTree = "<group>"; };
 		770EB4A71B7A3B6B00D6B33A /* PongBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PongBar.swift; path = Source/PongBar.swift; sourceTree = "<group>"; };
+		77189D7B1B7A8EB400BA8DD5 /* GameDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDelegate.swift; sourceTree = "<group>"; };
+		77189D7F1B7AB74000BA8DD5 /* MotionKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MotionKit.swift; path = Source/MotionKit.swift; sourceTree = "<group>"; };
 		779691DA1B7524B5003C74E2 /* Gameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gameplay.swift; path = Source/Gameplay.swift; sourceTree = "<group>"; };
 		779691E21B7524EC003C74E2 /* TiltGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiltGame.swift; path = Source/TiltGame.swift; sourceTree = "<group>"; };
 		779691E41B7524FF003C74E2 /* DragGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DragGame.swift; path = Source/DragGame.swift; sourceTree = "<group>"; };
@@ -479,10 +483,12 @@
 			children = (
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				779691DA1B7524B5003C74E2 /* Gameplay.swift */,
+				77189D7B1B7A8EB400BA8DD5 /* GameDelegate.swift */,
 				779691EE1B752579003C74E2 /* TapGame */,
 				779691F11B7525B2003C74E2 /* SwipeGame */,
 				770EB4AB1B7A3B7000D6B33A /* DragGame */,
 				779691E21B7524EC003C74E2 /* TiltGame.swift */,
+				77189D7F1B7AB74000BA8DD5 /* MotionKit.swift */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 			);
@@ -657,6 +663,7 @@
 						CreatedOnToolsVersion = 6.0.1;
 					};
 					B77F1B2D17B978D7009739AE = {
+						DevelopmentTeam = 496H97QG6Z;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 0;
@@ -866,6 +873,8 @@
 				779691E51B7524FF003C74E2 /* DragGame.swift in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				779691DB1B7524B5003C74E2 /* Gameplay.swift in Sources */,
+				77189D801B7AB74000BA8DD5 /* MotionKit.swift in Sources */,
+				77189D7C1B7A8EB400BA8DD5 /* GameDelegate.swift in Sources */,
 				779691E91B752523003C74E2 /* SwipeGame.swift in Sources */,
 				7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
