@@ -12,6 +12,11 @@
 		770EB4A81B7A3B6B00D6B33A /* PongBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770EB4A71B7A3B6B00D6B33A /* PongBar.swift */; };
 		77189D7C1B7A8EB400BA8DD5 /* GameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77189D7B1B7A8EB400BA8DD5 /* GameDelegate.swift */; };
 		77189D801B7AB74000BA8DD5 /* MotionKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77189D7F1B7AB74000BA8DD5 /* MotionKit.swift */; };
+		77189D841B7D1A1600BA8DD5 /* TiltTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77189D831B7D1A1600BA8DD5 /* TiltTile.swift */; };
+		77189D871B7D8A0B00BA8DD5 /* ScoreSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77189D861B7D8A0B00BA8DD5 /* ScoreSingleton.swift */; };
+		77189D9D1B7ECB9700BA8DD5 /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77189D9C1B7ECB9700BA8DD5 /* Stats.swift */; };
+		77189D9F1B7ECBEA00BA8DD5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77189D9E1B7ECBEA00BA8DD5 /* Settings.swift */; };
+		77189DAD1B7ED73300BA8DD5 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77189DAC1B7ED73300BA8DD5 /* Info.swift */; };
 		779691DB1B7524B5003C74E2 /* Gameplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779691DA1B7524B5003C74E2 /* Gameplay.swift */; };
 		779691E31B7524EC003C74E2 /* TiltGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779691E21B7524EC003C74E2 /* TiltGame.swift */; };
 		779691E51B7524FF003C74E2 /* DragGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779691E41B7524FF003C74E2 /* DragGame.swift */; };
@@ -171,6 +176,11 @@
 		770EB4A71B7A3B6B00D6B33A /* PongBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PongBar.swift; path = Source/PongBar.swift; sourceTree = "<group>"; };
 		77189D7B1B7A8EB400BA8DD5 /* GameDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDelegate.swift; sourceTree = "<group>"; };
 		77189D7F1B7AB74000BA8DD5 /* MotionKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MotionKit.swift; path = Source/MotionKit.swift; sourceTree = "<group>"; };
+		77189D831B7D1A1600BA8DD5 /* TiltTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiltTile.swift; path = Source/TiltTile.swift; sourceTree = "<group>"; };
+		77189D861B7D8A0B00BA8DD5 /* ScoreSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreSingleton.swift; path = Source/ScoreSingleton.swift; sourceTree = "<group>"; };
+		77189D9C1B7ECB9700BA8DD5 /* Stats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stats.swift; path = Source/Stats.swift; sourceTree = "<group>"; };
+		77189D9E1B7ECBEA00BA8DD5 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = Source/Settings.swift; sourceTree = "<group>"; };
+		77189DAC1B7ED73300BA8DD5 /* Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Info.swift; path = Source/Info.swift; sourceTree = "<group>"; };
 		779691DA1B7524B5003C74E2 /* Gameplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gameplay.swift; path = Source/Gameplay.swift; sourceTree = "<group>"; };
 		779691E21B7524EC003C74E2 /* TiltGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TiltGame.swift; path = Source/TiltGame.swift; sourceTree = "<group>"; };
 		779691E41B7524FF003C74E2 /* DragGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DragGame.swift; path = Source/DragGame.swift; sourceTree = "<group>"; };
@@ -343,6 +353,15 @@
 			name = DragGame;
 			sourceTree = "<group>";
 		};
+		77189D851B7D2B1E00BA8DD5 /* TiltGame */ = {
+			isa = PBXGroup;
+			children = (
+				77189D831B7D1A1600BA8DD5 /* TiltTile.swift */,
+				779691E21B7524EC003C74E2 /* TiltGame.swift */,
+			);
+			name = TiltGame;
+			sourceTree = "<group>";
+		};
 		779691EE1B752579003C74E2 /* TapGame */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,11 +502,15 @@
 			children = (
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				779691DA1B7524B5003C74E2 /* Gameplay.swift */,
+				77189DAC1B7ED73300BA8DD5 /* Info.swift */,
+				77189D9C1B7ECB9700BA8DD5 /* Stats.swift */,
+				77189D9E1B7ECBEA00BA8DD5 /* Settings.swift */,
 				77189D7B1B7A8EB400BA8DD5 /* GameDelegate.swift */,
+				77189D861B7D8A0B00BA8DD5 /* ScoreSingleton.swift */,
 				779691EE1B752579003C74E2 /* TapGame */,
 				779691F11B7525B2003C74E2 /* SwipeGame */,
 				770EB4AB1B7A3B7000D6B33A /* DragGame */,
-				779691E21B7524EC003C74E2 /* TiltGame.swift */,
+				77189D851B7D2B1E00BA8DD5 /* TiltGame */,
 				77189D7F1B7AB74000BA8DD5 /* MotionKit.swift */,
 				7A40362019DDEF0D007B6E8F /* Platforms */,
 				D352B48019EC608A00829775 /* MetalShaders */,
@@ -870,8 +893,11 @@
 				779691EB1B752544003C74E2 /* SwipeTile.swift in Sources */,
 				779691F01B7525A7003C74E2 /* TapGame.swift in Sources */,
 				779691E31B7524EC003C74E2 /* TiltGame.swift in Sources */,
+				77189DAD1B7ED73300BA8DD5 /* Info.swift in Sources */,
+				77189D9F1B7ECBEA00BA8DD5 /* Settings.swift in Sources */,
 				779691E51B7524FF003C74E2 /* DragGame.swift in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				77189D9D1B7ECB9700BA8DD5 /* Stats.swift in Sources */,
 				779691DB1B7524B5003C74E2 /* Gameplay.swift in Sources */,
 				77189D801B7AB74000BA8DD5 /* MotionKit.swift in Sources */,
 				77189D7C1B7A8EB400BA8DD5 /* GameDelegate.swift in Sources */,
@@ -880,6 +906,8 @@
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				770EB4A81B7A3B6B00D6B33A /* PongBar.swift in Sources */,
 				779691ED1B752562003C74E2 /* TapTile.swift in Sources */,
+				77189D841B7D1A1600BA8DD5 /* TiltTile.swift in Sources */,
+				77189D871B7D8A0B00BA8DD5 /* ScoreSingleton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1160,6 +1188,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1195,6 +1225,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

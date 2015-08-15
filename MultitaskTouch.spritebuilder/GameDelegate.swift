@@ -10,4 +10,6 @@ import Foundation
 
 protocol GameDelegate {
     func gameOver()
+    func pauseGame()
+    func unpaused()
 }

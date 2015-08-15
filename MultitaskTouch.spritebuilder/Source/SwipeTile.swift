@@ -14,7 +14,7 @@ enum blockDirectionType {
 
 class SwipeTile: CCSprite {
     
-    var blockMoveSpeed = 1
+    var blockMoveSpeed = 1.0
     var blockDirection: blockDirectionType = .Up {
         didSet {
             if blockDirection == .Up {

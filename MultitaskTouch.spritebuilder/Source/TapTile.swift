@@ -19,7 +19,7 @@ class TapTile: CCNode {
         didSet {
             tapTimeLabel.string = "\(countTime)"
             if countTime == 0 {
-                //gameOver
+                gameOver()
             }
         }
     }
@@ -44,12 +44,12 @@ class TapTile: CCNode {
     }
     
     func gameOver(){
+        parent.unschedule("startGeneratingTapBlocks")
         delegate.gameOver()
     }
     
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         self.removeFromParent()
-        println("detected touch")
     }
     
     override func update(delta: CCTime) {

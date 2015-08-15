@@ -10,6 +10,5 @@ import Foundation
 
 class PongBar: CCSprite {
     
-//    weak var bar: CCNode!
     weak var grabBox: CCNode!
 }

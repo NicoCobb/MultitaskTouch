@@ -12,10 +12,15 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
    
     weak var swipeSensor: CCNode!
     weak var gamePhysicsNode: CCPhysicsNode!
+    weak var swipeTutorial: CCNode!
     
     var randomTileSpawn = arc4random_uniform(0)
+        //continual 4 seconds w/ random 0 or 1 extra second = 3-5 seconds
+    var randomTileSpawnBaseTime: CCTime = 4
     var startTouchPosition: CGPoint?
     var endTouchPosition: CGPoint?
+    var blockMoveSpeedIncrease: Double = 0
+    var tutorialFinished = false
     
     var runSwipeCheck = false
     var swipeRemove = false
@@ -23,11 +28,14 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     var delegate: GameDelegate!
     
     func didLoadFromCCB() {
+        //create game invisible and inactive
+        opacity = 0
+        cascadeOpacityEnabled = true
+        userInteractionEnabled = false
+        paused = true
         userInteractionEnabled = true
-//        gamePhysicsNode.debugDraw = true
+        //gamePhysicsNode.debugDraw = true
         gamePhysicsNode.collisionDelegate = self
-        var randomTileSpawnTime = CCTime(randomTileSpawn)
-        scheduleOnce("generateSwipeBlock", delay: randomTileSpawnTime)
     }
     
     override func onEnter() {
@@ -43,23 +51,26 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     
     func generateSwipeBlock() {
         //select block location
-//        self.unschedule("generateSwipeBlock")
+        self.unschedule("generateSwipeBlock")
         var tileYPosition = CGFloat(arc4random_uniform(UInt32(contentSizeInPoints.height)))
         var tileSpawnPoint = ccp((0), (tileYPosition))
         var spawnedTile = CCBReader.load("SwipeTile") as! SwipeTile
+        spawnedTile.blockMoveSpeed += blockMoveSpeedIncrease
         spawnedTile.scale = 0.5
         spawnedTile.position = tileSpawnPoint
         gamePhysicsNode.addChild(spawnedTile)
         
         //generate tiles between 3 and 5 seconds
-        randomTileSpawn = arc4random_uniform(3) + 3
+    }
+    
+    func startGeneratingSwipeBlocks() {
+        randomTileSpawn = arc4random_uniform(2)
         var randomTileSpawnTime = CCTime(randomTileSpawn)
         scheduleOnce("generateSwipeBlock", delay: randomTileSpawnTime)
     }
     
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, swipeSensor: CCNode!, swipeTile: SwipeTile!) -> Bool {
         currentBlock = swipeTile
-        println(swipeTile.blockDirection)
         return false
     }
     
@@ -71,24 +82,27 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
         gameOver()
     }
     
-    func swipeGameOver() {
-        parent.paused = true
-        unschedule("generateSwipeBlock")
-    }
-    
     //if they swipe in the right direction in the node, then remove it from the scene
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
+        if tutorialFinished == false {
+            tutorialFinished = true
+            var moveInAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(2 * boundingBox().width), CGFloat(boundingBox().height / 2)))
+            var moveInAnimated = CCActionEaseElasticIn(action: moveInAction, period: 1)
+            var deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
+            var runGame = CCActionCallFunc(target: self, selector: "activateGame")
+            var sequence = CCActionSequence(array: [moveInAnimated, deleteTutorial, runGame])
+            swipeTutorial.runAction(sequence)
+            delegate.unpaused()
+        }
+        
         let touchLocation = touch.locationInNode(self)
         if swipeSensor.boundingBox().contains(touchLocation) {
             startTouchPosition = touchLocation
-            println("startTouchPosition: \(startTouchPosition)")
         }
     }
     
     override func touchEnded(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         endTouchPosition = touch.locationInNode(self)
-        println("endTouchPosition: \(endTouchPosition)")
-
         
         var swipeYLength: CGFloat = 0
         var swipeXLength: CGFloat = 0
@@ -102,9 +116,6 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
         
         //unwrap block and don't run func if nil
         if let activeBlock = currentBlock{
-            println("block Direction: \(activeBlock.rotation)")
-            println("swipeYLength: \(swipeYLength)")
-            println("swipeXLength: \(swipeXLength)")
             //check if swipe was vertical
             if abs(swipeYLength) >= abs(swipeXLength) {
                 //check if swipe was up for Up block
@@ -144,6 +155,33 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     
     func gameOver(){
         delegate.gameOver()
+        self.paused = true
+    }
+    
+    func raiseDifficulty() {
+        if randomTileSpawnBaseTime < 0 {
+            randomTileSpawnBaseTime -= 1
+            unschedule("startGeneratingSwipeBlocks")
+            schedule("startGeneratingSwipeBlocks", interval: randomTileSpawnBaseTime)
+        } else {
+            blockMoveSpeedIncrease += 0.5
+        }
+    }
+    
+    func removeTutorial() {
+        swipeTutorial.removeFromParent()
+    }
+    
+    func activateGame() {
+        schedule("startGeneratingSwipeBlocks", interval: randomTileSpawnBaseTime)
+        generateSwipeBlock()
+    }
+    
+    func showGame() {
+        opacity = 1
+        cascadeOpacityEnabled = true
+        userInteractionEnabled = true
+        paused = false
     }
     
 }

@@ -14,11 +14,14 @@ class DragGame: CCNode {
     weak var topBorder: CCNode!
     weak var leftBorder: CCNode!
     weak var rightBorder: CCNode!
+    weak var dragTutorial: CCNode!
     
     var pongBar: PongBar!
     var pongBall: CCSprite!
     var touchingBar = false
     var delegate: GameDelegate!
+    var tutorialFinished = false
+    var canMoveBar = true
     
 //    var grabSpacePoint: CGPoint!
 //    var grabSpaceBoxWidth: CGFloat!
@@ -33,9 +36,12 @@ class DragGame: CCNode {
     var speedBuffer: CGFloat = 10
     
     func didLoadFromCCB() {
-        userInteractionEnabled = true
-        pongBall.physicsBody.velocity = ccp(0, -ballSpeed)
-        gamePhysicsNode.debugDraw = true
+        //create game invisible and inactive
+        opacity = 0
+        cascadeOpacityEnabled = true
+        userInteractionEnabled = false
+        paused = true
+//        gamePhysicsNode.debugDraw = true
     }
     
     override func onEnter() {
@@ -67,13 +73,23 @@ class DragGame: CCNode {
         rightBorder.physicsBody.type = CCPhysicsBodyType.Static
         rightBorder.physicsBody.elasticity = 1
         rightBorder.physicsBody.friction = 0
+        delegate.pauseGame()
     }
     
+    //MARK: tutorial animation
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
+        if tutorialFinished == false {
+            tutorialFinished = true
+            var moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(-2 * boundingBox().width), CGFloat(boundingBox().height / 2)))
+            var moveOutAnimated = CCActionEaseElasticIn(action: moveOutAction, period: 1)
+            var deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
+            var runGame = CCActionCallFunc(target: self, selector: "activateGame")
+            var sequence = CCActionSequence(array: [moveOutAnimated, deleteTutorial, runGame])
+            dragTutorial.runAction(sequence)
+            delegate.unpaused()
+        }
+        
         let touchLocation = touch.locationInNode(self)
-        println("pongBar grab boundingBox: \(pongBar.grabBox.boundingBox())")
-        println("pongBar Position: \(pongBar.positionInPoints)")
-        println("touch Position: \(touchLocation)")
         
         var grabSpacePoint = ccp(pongBar.positionInPoints.x - pongBar.boundingBox().width/2 - grabBuffer/2, pongBar.positionInPoints.y - pongBar.boundingBox().height/2 - grabBuffer/2)
         var grabSpaceBoxWidth = pongBar.boundingBox().width * CGFloat(pongBar.scale) + grabBuffer
@@ -83,8 +99,10 @@ class DragGame: CCNode {
         
         var xBuffer = pongBar.contentSizeInPoints.width * CGFloat(pongBar.scale)
         
-        if touchLocation.x > pongBar.positionInPoints.x - xBuffer && touchLocation.x < pongBar.positionInPoints.x + xBuffer && touchLocation.y > pongBar.positionInPoints.y - pongBar.contentSizeInPoints.height * CGFloat(pongBar.scale) && touchLocation.y < pongBar.positionInPoints.y + pongBar.contentSizeInPoints.width * CGFloat(pongBar.scale){
-            println("touching bar")
+        if touchLocation.x > pongBar.positionInPoints.x - xBuffer &&
+            touchLocation.x < pongBar.positionInPoints.x + xBuffer &&
+            touchLocation.y > pongBar.positionInPoints.y - pongBar.contentSizeInPoints.height * CGFloat(pongBar.scale) &&
+            touchLocation.y < pongBar.positionInPoints.y + pongBar.contentSizeInPoints.width * CGFloat(pongBar.scale){
             touchingBar = true
             spaceBetweenBarCenterAndTouch = touchLocation.x - pongBar.positionInPoints.x
         }
@@ -119,11 +137,19 @@ class DragGame: CCNode {
 
         //clamp bar position in node
             //check left boundary
-        if (pongBar.positionInPoints.x) <= 0 {
+        if (pongBar.positionInPoints.x) < 0 {
+            canMoveBar = false
             pongBar.positionInPoints.x = 0
             //check right boundary
-        } else if (pongBar.positionInPoints.x) >= boundingBox().width {
+        } else if (pongBar.positionInPoints.x) >= 0 {
+            canMoveBar = true
+        }
+        
+        if (pongBar.positionInPoints.x) >= boundingBox().width {
             pongBar.positionInPoints.x = boundingBox().width
+            canMoveBar = false
+        } else if (pongBar.positionInPoints.x) <= boundingBox().width {
+            canMoveBar = true
         }
         
         //GAME OVER TRIGGER
@@ -134,6 +160,27 @@ class DragGame: CCNode {
     }
     
     func gameOver(){
+        self.paused = true
         delegate.gameOver()
+    }
+    
+    func raiseDifficulty() {
+        ballSpeed += 20
+        pongBall.physicsBody.applyImpulse(ccp(0, 20))
+    }
+    
+    func removeTutorial() {
+        dragTutorial.removeFromParent()
+    }
+    
+    func activateGame() {
+        pongBall.physicsBody.velocity = ccp(0, ballSpeed)
+    }
+    
+    func showGame() {
+        opacity = 1
+        cascadeOpacityEnabled = true
+        userInteractionEnabled = true
+        paused = false
     }
 }
