@@ -25,6 +25,7 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     var runSwipeCheck = false
     var swipeRemove = false
     var currentBlock: SwipeTile?
+    var currentBlocks: [SwipeTile]?
     var delegate: GameDelegate!
     
     func didLoadFromCCB() {
@@ -71,6 +72,7 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, swipeSensor: CCNode!, swipeTile: SwipeTile!) -> Bool {
         currentBlock = swipeTile
+//        currentBlocks.append(swipeTile)
         return false
     }
     
@@ -86,7 +88,7 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         if tutorialFinished == false {
             tutorialFinished = true
-            var moveInAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(2 * boundingBox().width), CGFloat(boundingBox().height / 2)))
+            var moveInAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(2 * boundingBox().width), CGFloat(boundingBox().height * 0.0)))
             var moveInAnimated = CCActionEaseElasticIn(action: moveInAction, period: 1)
             var deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
             var runGame = CCActionCallFunc(target: self, selector: "activateGame")
@@ -159,7 +161,7 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     }
     
     func raiseDifficulty() {
-        if randomTileSpawnBaseTime < 0 {
+        if randomTileSpawnBaseTime > 0 {
             randomTileSpawnBaseTime -= 1
             unschedule("startGeneratingSwipeBlocks")
             schedule("startGeneratingSwipeBlocks", interval: randomTileSpawnBaseTime)

@@ -24,6 +24,7 @@
 		779691EB1B752544003C74E2 /* SwipeTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779691EA1B752544003C74E2 /* SwipeTile.swift */; };
 		779691ED1B752562003C74E2 /* TapTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779691EC1B752562003C74E2 /* TapTile.swift */; };
 		779691F01B7525A7003C74E2 /* TapGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779691EF1B7525A7003C74E2 /* TapGame.swift */; };
+		77D6D5A01B7EF00900B1A48E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77D6D59F1B7EF00900B1A48E /* Images.xcassets */; };
 		7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A046D7519E84C36004C4763 /* MainScene.swift */; };
 		7A10CE5619F32FB0001673C3 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A046D7519E84C36004C4763 /* MainScene.swift */; };
 		7A40360419DDEE84007B6E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360319DDEE84007B6E8F /* main.m */; };
@@ -188,6 +189,7 @@
 		779691EA1B752544003C74E2 /* SwipeTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeTile.swift; path = Source/SwipeTile.swift; sourceTree = "<group>"; };
 		779691EC1B752562003C74E2 /* TapTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TapTile.swift; path = Source/TapTile.swift; sourceTree = "<group>"; };
 		779691EF1B7525A7003C74E2 /* TapGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TapGame.swift; path = Source/TapGame.swift; sourceTree = "<group>"; };
+		77D6D59F1B7EF00900B1A48E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7A046D7519E84C36004C4763 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScene.swift; path = Source/MainScene.swift; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* MultitaskTouch Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MultitaskTouch Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
@@ -592,6 +594,7 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77D6D59F1B7EF00900B1A48E /* Images.xcassets */,
 				7A40366119DDF8C2007B6E8F /* Platforms */,
 				5B12100D197483EE004C1E1D /* res */,
 				B73789911807667A0076A88C /* Icons */,
@@ -679,6 +682,7 @@
 		B77F1B2617B978D7009739AE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Apportable;
 				TargetAttributes = {
@@ -803,6 +807,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				77D6D5A01B7EF00900B1A48E /* Images.xcassets in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,

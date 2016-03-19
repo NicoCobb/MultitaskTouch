@@ -10,7 +10,7 @@ import Foundation
 
 class TiltTile: CCSprite {
     
-    var tileSpeed: CGFloat = 1
+    var tileSpeed: CGFloat = 0.5
 //    var delegate: GameDelegate!
     
     func didLoadFromCCB() {

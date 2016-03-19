@@ -91,6 +91,7 @@ class Gameplay: CCScene {
             pauseGame()
         } else if ScoreSingleton.sharedInstance.score == 15 {
             gameFour.showGame()
+//            gameFour.firstBlock.visible = true
             pauseGame()
         }
         if (ScoreSingleton.sharedInstance.score % 20) == 0 {
@@ -122,11 +123,18 @@ extension Gameplay: GameDelegate{
         self.paused = true
         
         unschedule("raiseScore")
-        ScoreSingleton.sharedInstance.highScore = ScoreSingleton.sharedInstance.score
+        //save high score
+        if ScoreSingleton.sharedInstance.highScore < ScoreSingleton.sharedInstance.score {
+            ScoreSingleton.sharedInstance.highScore = ScoreSingleton.sharedInstance.score
+        }
         gameOne.unscheduleAllSelectors()
+        gameOne.userInteractionEnabled = false
         gameTwo.unscheduleAllSelectors()
+        gameTwo.userInteractionEnabled = false
         gameThree.unscheduleAllSelectors()
+        gameThree.userInteractionEnabled = false
         gameFour.unscheduleAllSelectors()
+        gameFour.userInteractionEnabled = false
         gameFour.motionKit.stopDeviceMotionUpdates()
 //        gameFour.unschedule("generateTiltBlock")
         ScoreSingleton.sharedInstance.score = 0
@@ -134,7 +142,6 @@ extension Gameplay: GameDelegate{
         buttonNode.visible = true
         retryButton.userInteractionEnabled = true
         menuButton.userInteractionEnabled = true
-        ScoreSingleton.sharedInstance.highScore = ScoreSingleton.sharedInstance.score
     }
     
     func pauseGame() {

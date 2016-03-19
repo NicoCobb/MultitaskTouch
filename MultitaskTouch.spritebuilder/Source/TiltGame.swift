@@ -22,6 +22,7 @@ class TiltGame: CCNode, CCPhysicsCollisionDelegate {
     let motionKit = MotionKit()
     var blocksInSpawn = 7
     var tutorialFinished = false
+    var firstBlock: TiltTile = CCBReader.load("TiltTile") as! TiltTile
     
     var xValString: String!
     var yValString: String!
@@ -39,6 +40,12 @@ class TiltGame: CCNode, CCPhysicsCollisionDelegate {
     
     override func onEnter() {
         super.onEnter()
+//        var blockSpacing = CGFloat(3) * contentSizeInPoints.width / CGFloat(blocksInSpawn)
+//        var tileSpawnPoint = ccp(contentSizeInPoints.width / 2, contentSizeInPoints.height - 10)
+////        var firstBlock = CCBReader.load("TiltTile") as! TiltTile
+//        firstBlock.position = tileSpawnPoint
+//        firstBlock.visible = false
+//        gamePhysicsNode.addChild(firstBlock)
     }
     
     func reposition (x: Double) {
@@ -104,7 +111,7 @@ class TiltGame: CCNode, CCPhysicsCollisionDelegate {
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         if tutorialFinished == false {
             tutorialFinished = true
-            var moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(2 * boundingBox().width), CGFloat(boundingBox().height / 2)))
+            var moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(2 * boundingBox().width), CGFloat(boundingBox().height * 0.0)))
             var moveOutAnimated = CCActionEaseElasticIn(action: moveOutAction, period: 1)
             var deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
             var runGame = CCActionCallFunc(target: self, selector: "activateGame")

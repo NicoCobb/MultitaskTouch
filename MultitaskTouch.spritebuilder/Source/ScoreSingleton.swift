@@ -25,7 +25,6 @@ class ScoreSingleton: NSObject {
     }
 
     private override init() {
-        highScore = 0
         score = 0
     }
 }

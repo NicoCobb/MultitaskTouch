@@ -92,7 +92,7 @@ class TapGame: CCNode {
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         if tutorialFinished == false {
             tutorialFinished = true
-            var moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(-2 * boundingBox().width), CGFloat(boundingBox().height / 2)))
+            var moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(-2 * boundingBox().width), CGFloat(boundingBox().height * 0.0)))
             var moveOutAnimated = CCActionEaseElasticIn(action: moveOutAction, period: 1)
             var deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
             var runGame = CCActionCallFunc(target: self, selector: "activateGame")
