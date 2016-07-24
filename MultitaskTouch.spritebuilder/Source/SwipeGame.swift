@@ -53,9 +53,9 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     func generateSwipeBlock() {
         //select block location
         self.unschedule("generateSwipeBlock")
-        var tileYPosition = CGFloat(arc4random_uniform(UInt32(contentSizeInPoints.height)))
-        var tileSpawnPoint = ccp((0), (tileYPosition))
-        var spawnedTile = CCBReader.load("SwipeTile") as! SwipeTile
+        let tileYPosition = CGFloat(arc4random_uniform(UInt32(contentSizeInPoints.height)))
+        let tileSpawnPoint = ccp((0), (tileYPosition))
+        let spawnedTile = CCBReader.load("SwipeTile") as! SwipeTile
         spawnedTile.blockMoveSpeed += blockMoveSpeedIncrease
         spawnedTile.scale = 0.5
         spawnedTile.position = tileSpawnPoint
@@ -66,7 +66,7 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     
     func startGeneratingSwipeBlocks() {
         randomTileSpawn = arc4random_uniform(2)
-        var randomTileSpawnTime = CCTime(randomTileSpawn)
+        let randomTileSpawnTime = CCTime(randomTileSpawn)
         scheduleOnce("generateSwipeBlock", delay: randomTileSpawnTime)
     }
     
@@ -88,11 +88,11 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         if tutorialFinished == false {
             tutorialFinished = true
-            var moveInAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(2 * boundingBox().width), CGFloat(boundingBox().height * 0.0)))
-            var moveInAnimated = CCActionEaseElasticIn(action: moveInAction, period: 1)
-            var deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
-            var runGame = CCActionCallFunc(target: self, selector: "activateGame")
-            var sequence = CCActionSequence(array: [moveInAnimated, deleteTutorial, runGame])
+            let moveInAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(2 * boundingBox().width), CGFloat(boundingBox().height * 0.0)))
+            let moveInAnimated = CCActionEaseElasticIn(action: moveInAction, period: 1)
+            let deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
+            let runGame = CCActionCallFunc(target: self, selector: "activateGame")
+            let sequence = CCActionSequence(array: [moveInAnimated, deleteTutorial, runGame])
             swipeTutorial.runAction(sequence)
             delegate.unpaused()
         }

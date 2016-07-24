@@ -38,17 +38,17 @@ class TapGame: CCNode {
     
     func startGeneratingTapBlocks() {
         randomTileSpawn = arc4random_uniform(2)
-        var randomTileSpawnTime = CCTime(randomTileSpawn)
+        let randomTileSpawnTime = CCTime(randomTileSpawn)
         scheduleOnce("generateTapBlock", delay: randomTileSpawnTime)
     }
     
     func generateTapBlock() {
         //select enemy location
         
-        var spawnedTile = CCBReader.load("TapTile") as! TapTile
-        var tileXPosition = CGFloat(arc4random_uniform(UInt32(self.contentSizeInPoints.width)))
-        var tileYPosition = CGFloat(arc4random_uniform(UInt32(self.contentSizeInPoints.height)))
-        var tileSpawnPoint = ccp(tileXPosition, tileYPosition)
+        let spawnedTile = CCBReader.load("TapTile") as! TapTile
+        let tileXPosition = CGFloat(arc4random_uniform(UInt32(self.contentSizeInPoints.width)))
+        let tileYPosition = CGFloat(arc4random_uniform(UInt32(self.contentSizeInPoints.height)))
+        let tileSpawnPoint = ccp(tileXPosition, tileYPosition)
         spawnedTile.position = tileSpawnPoint
         spawnedTile.countTime -= blockTapTimeDecrease
         
@@ -92,11 +92,11 @@ class TapGame: CCNode {
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         if tutorialFinished == false {
             tutorialFinished = true
-            var moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(-2 * boundingBox().width), CGFloat(boundingBox().height * 0.0)))
-            var moveOutAnimated = CCActionEaseElasticIn(action: moveOutAction, period: 1)
-            var deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
-            var runGame = CCActionCallFunc(target: self, selector: "activateGame")
-            var sequence = CCActionSequence(array: [moveOutAnimated, deleteTutorial, runGame])
+            let moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(-2 * boundingBox().width), CGFloat(boundingBox().height * 0.0)))
+            let moveOutAnimated = CCActionEaseElasticIn(action: moveOutAction, period: 1)
+            let deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
+            let runGame = CCActionCallFunc(target: self, selector: "activateGame")
+            let sequence = CCActionSequence(array: [moveOutAnimated, deleteTutorial, runGame])
             tapTutorial.runAction(sequence)
             delegate.unpaused()
         }

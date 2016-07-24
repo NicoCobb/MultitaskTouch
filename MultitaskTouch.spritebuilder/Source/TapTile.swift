@@ -33,7 +33,7 @@ class TapTile: CCNode {
     }
     
     func shrinkBlock() {
-        var shrink = CCActionScaleTo(duration: tapTime, scale: 0)
+        let shrink = CCActionScaleTo(duration: tapTime, scale: 0)
         //var nextAction = CCAction()
         //runAction(CCActionSequence(array:[shrink, nextAction])
         runAction(shrink)

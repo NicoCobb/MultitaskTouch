@@ -80,24 +80,24 @@ class DragGame: CCNode {
     override func touchBegan(touch: CCTouch!, withEvent event: CCTouchEvent!) {
         if tutorialFinished == false {
             tutorialFinished = true
-            var moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(-2 * boundingBox().width), CGFloat(boundingBox().height * 0)))
-            var moveOutAnimated = CCActionEaseElasticIn(action: moveOutAction, period: 1)
-            var deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
-            var runGame = CCActionCallFunc(target: self, selector: "activateGame")
-            var sequence = CCActionSequence(array: [moveOutAnimated, deleteTutorial, runGame])
+            let moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(-2 * boundingBox().width), CGFloat(boundingBox().height * 0)))
+            let moveOutAnimated = CCActionEaseElasticIn(action: moveOutAction, period: 1)
+            let deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
+            let runGame = CCActionCallFunc(target: self, selector: "activateGame")
+            let sequence = CCActionSequence(array: [moveOutAnimated, deleteTutorial, runGame])
             dragTutorial.runAction(sequence)
             delegate.unpaused()
         }
         
         let touchLocation = touch.locationInNode(self)
         
-        var grabSpacePoint = ccp(pongBar.positionInPoints.x - pongBar.boundingBox().width/2 - grabBuffer/2, pongBar.positionInPoints.y - pongBar.boundingBox().height/2 - grabBuffer/2)
-        var grabSpaceBoxWidth = pongBar.boundingBox().width * CGFloat(pongBar.scale) + grabBuffer
-        var grabSpaceBoxHeight = pongBar.boundingBox().height * CGFloat(pongBar.scale) + grabBuffer
-        var grabSpaceBoxSize = CGSize(width: grabSpaceBoxWidth, height: grabSpaceBoxHeight)
+        let grabSpacePoint = ccp(pongBar.positionInPoints.x - pongBar.boundingBox().width/2 - grabBuffer/2, pongBar.positionInPoints.y - pongBar.boundingBox().height/2 - grabBuffer/2)
+        let grabSpaceBoxWidth = pongBar.boundingBox().width * CGFloat(pongBar.scale) + grabBuffer
+        let grabSpaceBoxHeight = pongBar.boundingBox().height * CGFloat(pongBar.scale) + grabBuffer
+        let grabSpaceBoxSize = CGSize(width: grabSpaceBoxWidth, height: grabSpaceBoxHeight)
         var grabSpace = CGRect(origin: grabSpacePoint, size: grabSpaceBoxSize)
         
-        var xBuffer = pongBar.contentSizeInPoints.width * CGFloat(pongBar.scale)
+        let xBuffer = pongBar.contentSizeInPoints.width * CGFloat(pongBar.scale)
         
         if touchLocation.x > pongBar.positionInPoints.x - xBuffer &&
             touchLocation.x < pongBar.positionInPoints.x + xBuffer &&
@@ -123,8 +123,8 @@ class DragGame: CCNode {
     }
     
     override func update(delta: CCTime) {
-        var ballXVelocity = pongBall.physicsBody.velocity.x
-        var ballYVelocity = pongBall.physicsBody.velocity.y
+        let ballXVelocity = pongBall.physicsBody.velocity.x
+        let ballYVelocity = pongBall.physicsBody.velocity.y
         
         //clamp ball speed
         if ballYVelocity > ballSpeed {

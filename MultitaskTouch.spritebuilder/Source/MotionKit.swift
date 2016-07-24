@@ -126,7 +126,7 @@ class MotionKit {
     *   Starts magnetometer updates, providing data to the given handler through the given queue.
     *   You can access the retrieved values either by a Trailing Closure or through a Delegate.
     */
-    @availability(iOS, introduced=5.0)
+    @available(iOS, introduced=5.0)
     func getMagnetometerValues (interval: NSTimeInterval = 0.1, values: ((x: Double, y:Double, z:Double) -> ())? ){
         
         var valX: Double!
@@ -343,7 +343,7 @@ class MotionKit {
                 valX = data.magneticField.field.x
                 valY = data.magneticField.field.y
                 valZ = data.magneticField.field.z
-                valAccuracy = data.magneticField.accuracy.value
+                valAccuracy = data.magneticField.accuracy.rawValue
                 
                 
                 if values != nil{
@@ -369,21 +369,21 @@ class MotionKit {
     /*  MARK :- INSTANTANIOUS METHODS START HERE  */
     
     func getAccelerationAtCurrentInstant (values: (x:Double, y:Double, z:Double) -> ()){
-        self.getAccelerationFromDeviceMotion(interval: 0.5) { (x, y, z) -> () in
+        self.getAccelerationFromDeviceMotion(0.5) { (x, y, z) -> () in
             values(x: x,y: y,z: z)
             self.stopDeviceMotionUpdates()
         }
     }
     
     func getGravitationalAccelerationAtCurrentInstant (values: (x:Double, y:Double, z:Double) -> ()){
-        self.getGravityAccelerationFromDeviceMotion(interval: 0.5) { (x, y, z) -> () in
+        self.getGravityAccelerationFromDeviceMotion(0.5) { (x, y, z) -> () in
             values(x: x,y: y,z: z)
             self.stopDeviceMotionUpdates()
         }
     }
     
     func getAttitudeAtCurrentInstant (values: (attitude: CMAttitude) -> ()){
-        self.getAttitudeFromDeviceMotion(interval: 0.5) { (attitude) -> () in
+        self.getAttitudeFromDeviceMotion(0.5) { (attitude) -> () in
             values(attitude: attitude)
             self.stopDeviceMotionUpdates()
         }
@@ -391,14 +391,14 @@ class MotionKit {
     }
     
     func getMageticFieldAtCurrentInstant (values: (x:Double, y:Double, z:Double) -> ()){
-        self.getMagneticFieldFromDeviceMotion(interval: 0.5) { (x, y, z, accuracy) -> () in
+        self.getMagneticFieldFromDeviceMotion(0.5) { (x, y, z, accuracy) -> () in
             values(x: x,y: y,z: z)
             self.stopDeviceMotionUpdates()
         }
     }
     
     func getGyroValuesAtCurrentInstant (values: (x:Double, y:Double, z:Double) -> ()){
-        self.getRotationRateFromDeviceMotion(interval: 0.5) { (x, y, z) -> () in
+        self.getRotationRateFromDeviceMotion(0.5) { (x, y, z) -> () in
             values(x: x,y: y,z: z)
             self.stopDeviceMotionUpdates()
         }
@@ -447,7 +447,7 @@ class MotionKit {
     *  Discussion:
     *   Stops magnetometer updates.
     */
-    @availability(iOS, introduced=5.0)
+    @available(iOS, introduced=5.0)
     func stopmagnetometerUpdates() {
         self.manager.stopMagnetometerUpdates()
         NSLog("Magnetometer Updates Status - Stopped")

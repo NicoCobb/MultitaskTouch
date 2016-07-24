@@ -30,7 +30,7 @@ class SwipeTile: CCSprite {
     }
     
     func didLoadFromCCB() {
-        var randomBlockDirection = arc4random_uniform(4)
+        let randomBlockDirection = arc4random_uniform(4)
         if randomBlockDirection == 0 {
             blockDirection = .Up
         } else if randomBlockDirection == 1 {

@@ -19,7 +19,7 @@ class MainScene: CCNode {
     }
 
     func info() {
-        var infoScreen = CCBReader.load("Info", owner: self)
+        let infoScreen = CCBReader.load("Info", owner: self)
         self.addChild(infoScreen)
     }
     
