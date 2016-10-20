@@ -82,8 +82,8 @@ class DragGame: CCNode {
             tutorialFinished = true
             let moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(-2 * boundingBox().width), CGFloat(boundingBox().height * 0)))
             let moveOutAnimated = CCActionEaseElasticIn(action: moveOutAction, period: 1)
-            let deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
-            let runGame = CCActionCallFunc(target: self, selector: "activateGame")
+            let deleteTutorial = CCActionCallFunc(target: self, selector: #selector(DragGame.removeTutorial))
+            let runGame = CCActionCallFunc(target: self, selector: #selector(DragGame.activateGame))
             let sequence = CCActionSequence(array: [moveOutAnimated, deleteTutorial, runGame])
             dragTutorial.runAction(sequence)
             delegate.unpaused()

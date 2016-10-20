@@ -14,7 +14,7 @@ class TiltTile: CCSprite {
 //    var delegate: GameDelegate!
     
     func didLoadFromCCB() {
-        schedule("updateBox", interval: 1.0/60.0)
+        schedule(#selector(TiltTile.updateBox), interval: 1.0/60.0)
     }
     
     func updateBox(){

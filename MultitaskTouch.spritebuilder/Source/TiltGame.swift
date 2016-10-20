@@ -72,7 +72,7 @@ class TiltGame: CCNode, CCPhysicsCollisionDelegate {
     func startGeneratingTiltBlocks() {
         let randomTileSpawn = arc4random_uniform(2)
         let randomTileSpawnTime = CCTime(randomTileSpawn)
-        scheduleOnce("generateTiltBlock", delay: randomTileSpawnTime)
+        scheduleOnce(#selector(TiltGame.generateTiltBlock), delay: randomTileSpawnTime)
     }
     
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, tiltHero: CCNode!, tiltTile: CCNode!) -> Bool {
@@ -86,7 +86,7 @@ class TiltGame: CCNode, CCPhysicsCollisionDelegate {
     }
     
     func raiseDifficulty() {
-        blocksInSpawn++
+        blocksInSpawn += 1
     }
     
     func removeTutorial() {
@@ -98,7 +98,7 @@ class TiltGame: CCNode, CCPhysicsCollisionDelegate {
             (x, y, z) in
             self.reposition(y)
         }
-        schedule("startGeneratingTiltBlocks", interval: randomTiltSpawnBaseTime)
+        schedule(#selector(TiltGame.startGeneratingTiltBlocks), interval: randomTiltSpawnBaseTime)
     }
     
     func showGame() {
@@ -113,8 +113,8 @@ class TiltGame: CCNode, CCPhysicsCollisionDelegate {
             tutorialFinished = true
             let moveOutAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(2 * boundingBox().width), CGFloat(boundingBox().height * 0.0)))
             let moveOutAnimated = CCActionEaseElasticIn(action: moveOutAction, period: 1)
-            let deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
-            let runGame = CCActionCallFunc(target: self, selector: "activateGame")
+            let deleteTutorial = CCActionCallFunc(target: self, selector: #selector(TiltGame.removeTutorial))
+            let runGame = CCActionCallFunc(target: self, selector: #selector(TiltGame.activateGame))
             let sequence = CCActionSequence(array: [moveOutAnimated, deleteTutorial, runGame])
             tiltTutorial.runAction(sequence)
             delegate.unpaused()

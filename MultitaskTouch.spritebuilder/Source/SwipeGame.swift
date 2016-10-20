@@ -52,7 +52,7 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     
     func generateSwipeBlock() {
         //select block location
-        self.unschedule("generateSwipeBlock")
+        self.unschedule(#selector(SwipeGame.generateSwipeBlock))
         let tileYPosition = CGFloat(arc4random_uniform(UInt32(contentSizeInPoints.height)))
         let tileSpawnPoint = ccp((0), (tileYPosition))
         let spawnedTile = CCBReader.load("SwipeTile") as! SwipeTile
@@ -67,7 +67,7 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     func startGeneratingSwipeBlocks() {
         randomTileSpawn = arc4random_uniform(2)
         let randomTileSpawnTime = CCTime(randomTileSpawn)
-        scheduleOnce("generateSwipeBlock", delay: randomTileSpawnTime)
+        scheduleOnce(#selector(SwipeGame.generateSwipeBlock), delay: randomTileSpawnTime)
     }
     
     func ccPhysicsCollisionBegin(pair: CCPhysicsCollisionPair!, swipeSensor: CCNode!, swipeTile: SwipeTile!) -> Bool {
@@ -90,8 +90,8 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
             tutorialFinished = true
             let moveInAction = CCActionMoveTo(duration: 1.0, position: ccp(CGFloat(2 * boundingBox().width), CGFloat(boundingBox().height * 0.0)))
             let moveInAnimated = CCActionEaseElasticIn(action: moveInAction, period: 1)
-            let deleteTutorial = CCActionCallFunc(target: self, selector: "removeTutorial")
-            let runGame = CCActionCallFunc(target: self, selector: "activateGame")
+            let deleteTutorial = CCActionCallFunc(target: self, selector: #selector(SwipeGame.removeTutorial))
+            let runGame = CCActionCallFunc(target: self, selector: #selector(SwipeGame.activateGame))
             let sequence = CCActionSequence(array: [moveInAnimated, deleteTutorial, runGame])
             swipeTutorial.runAction(sequence)
             delegate.unpaused()
@@ -163,8 +163,8 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     func raiseDifficulty() {
         if randomTileSpawnBaseTime > 0 {
             randomTileSpawnBaseTime -= 1
-            unschedule("startGeneratingSwipeBlocks")
-            schedule("startGeneratingSwipeBlocks", interval: randomTileSpawnBaseTime)
+            unschedule(#selector(SwipeGame.startGeneratingSwipeBlocks))
+            schedule(#selector(SwipeGame.startGeneratingSwipeBlocks), interval: randomTileSpawnBaseTime)
         } else {
             blockMoveSpeedIncrease += 0.5
         }
@@ -175,7 +175,7 @@ class SwipeGame: CCNode, CCPhysicsCollisionDelegate {
     }
     
     func activateGame() {
-        schedule("startGeneratingSwipeBlocks", interval: randomTileSpawnBaseTime)
+        schedule(#selector(SwipeGame.startGeneratingSwipeBlocks), interval: randomTileSpawnBaseTime)
         generateSwipeBlock()
     }
     

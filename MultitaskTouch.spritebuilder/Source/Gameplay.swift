@@ -122,7 +122,7 @@ extension Gameplay: GameDelegate{
         gameFour.paused = true
         self.paused = true
         
-        unschedule("raiseScore")
+        unschedule(#selector(Gameplay.raiseScore))
         //save high score
         if ScoreSingleton.sharedInstance.highScore < ScoreSingleton.sharedInstance.score {
             ScoreSingleton.sharedInstance.highScore = ScoreSingleton.sharedInstance.score
@@ -167,7 +167,7 @@ extension Gameplay: GameDelegate{
         }
         
         if raisingScore == false {
-            schedule("raiseScore", interval: 1)
+            schedule(#selector(Gameplay.raiseScore), interval: 1)
             raisingScore = true
         }
     }

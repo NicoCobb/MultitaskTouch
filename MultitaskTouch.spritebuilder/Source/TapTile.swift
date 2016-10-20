@@ -29,7 +29,7 @@ class TapTile: CCNode {
         shrinkBlock()
         userInteractionEnabled = true
         rotation = 45
-        schedule("countDown", interval: 1)
+        schedule(#selector(TapTile.countDown), interval: 1)
     }
     
     func shrinkBlock() {
@@ -40,11 +40,11 @@ class TapTile: CCNode {
     }
     
     func countDown() {
-        countTime--
+        countTime -= 1
     }
     
     func gameOver(){
-        parent.unschedule("startGeneratingTapBlocks")
+        parent.unschedule(Selector("startGeneratingTapBlocks"))
         delegate.gameOver()
     }
     
